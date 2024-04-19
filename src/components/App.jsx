@@ -20,8 +20,6 @@ export const App = () => {
       const newImages = await response.json();
       const newImagesHits = newImages.hits;
 
-      // console.log('newImages', newImagesHits);
-
       setImages(prevImages => [...prevImages, ...newImagesHits]);
     } catch (error) {
       return error;
