@@ -30,10 +30,11 @@ export const App = () => {
   const loadMorePages = () => {
     setPage(prevPage => prevPage + 1);
   };
-
+  // eslint-disable-next-line
   useEffect(() => {
     if (!query) return;
     fetchImages(query, page);
+    // eslint-disable-next-line
   }, [query, page]);
 
   const handleSearchSubmit = searchQuery => {
