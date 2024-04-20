@@ -1,13 +1,19 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import { ImageGalleryItem } from './ImageGalleryItem';
-export const ImageGallery = ({ images }) => {
+import css from './styles.module.css';
+
+export const ImageGallery = ({ images, onImageClick }) => {
   return (
     <>
       <div>
-        <ul className="gallery">
-          {images.map(({ webformatURL }) => (
-            <ImageGalleryItem key={nanoid()} imageUrl={webformatURL} />
+        <ul className={css.imageGallery}>
+          {images.map(({ webformatURL, largeImageURL }) => (
+            <ImageGalleryItem
+              key={nanoid()}
+              imageUrl={webformatURL}
+              onClick={() => onImageClick(largeImageURL)}
+            />
           ))}
         </ul>
       </div>

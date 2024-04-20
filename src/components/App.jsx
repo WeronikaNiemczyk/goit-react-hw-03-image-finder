@@ -3,12 +3,14 @@ import { Searchbar } from './Searchbar';
 import { ImageGallery } from './ImageGallery';
 import { Button } from './Button';
 import { Loader } from './Loader';
+import { Modal } from './Modal';
 
 export const App = () => {
   const [query, setQuery] = useState('');
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [modal, setModal] = useState(null);
 
   const per_page = 12;
   const API_KEY = '34850794-1a63b0f1d33e83dba8f53aae2';
@@ -30,7 +32,7 @@ export const App = () => {
   const loadMorePages = () => {
     setPage(prevPage => prevPage + 1);
   };
-  // eslint-disable-next-line
+
   useEffect(() => {
     if (!query) return;
     fetchImages(query, page);
@@ -42,16 +44,21 @@ export const App = () => {
     setPage(1);
     setImages([]);
   };
-
+  const showModal = largeImageUrl => {
+    setModal(largeImageUrl);
+  };
+  const closeModal = () => {
+    setModal(null);
+  };
   return (
     <>
       <Searchbar onSubmit={handleSearchSubmit} />
-      <ImageGallery images={images} />
+      <ImageGallery images={images} onImageClick={showModal} />
       {images.length > per_page - 1 && (
         <Button onClick={loadMorePages}>Load more</Button>
       )}
       {isLoading && <Loader />}
-      {/* <Modal /> */}
+      {modal && <Modal onClose={closeModal} largeImageUrl={modal} />}
     </>
   );
 };

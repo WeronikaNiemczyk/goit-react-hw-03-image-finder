@@ -1,16 +1,11 @@
-import * as basicLightbox from 'basiclightbox';
+import css from './styles.module.css';
 
-export const Modal = () => {
-  const instance = basicLightbox.create(`
-    <img src="assets/images/image.png" width="800" height="600">
-`);
-
-  instance.show();
+export const Modal = ({ largeImageUrl, onClose }) => {
   return (
     <>
-      <div className="overlay">
-        <div className="modal">
-          <img src="" alt="" />
+      <div className={css.overlay}>
+        <div className={css.modal}>
+          <img src={largeImageUrl} alt="img" onClick={onClose} />
         </div>
       </div>
     </>
